@@ -1,0 +1,49 @@
+[package]
+name = "dv4rune"
+version = "0.1.0"
+description = "a rune-based command line tool that provides abstract user (device) interoperability"
+homepage = "https://blog.101248.xyz/zh/dv4rune"
+
+edition = "2024"
+authors = ["km0e <kmdr.error@gmail.com>"]
+repository = "https://github.com/km0e/dv4rune.git"
+
+[package.metadata.wix]
+upgrade-guid = "F5B8D690-7A05-4CDA-8FAC-AE3912689AFC"
+path-guid = "ED96C019-3206-4F56-8EA2-22C3F671E851"
+license = false
+eula = false
+
+[dependencies]
+dv-wrap = { path = "../dv-api/dv-wrap" }
+dv-api = { path = "../dv-api/dv-api", features = ["full"] }
+os2 = { path = "../dv-api/os2", features = ["serde", "rune"] }
+
+
+tokio = { version = "1.45", features = [
+    "fs",
+    "io-std",
+    "rt-multi-thread",
+    "macros",
+] }
+
+tracing = { version = "0.1" }
+home = { version = "0.5" }
+
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+
+rune = { version = "0.14" }
+rune-modules = { version = "0.14" }
+clap = { version = "4.5", features = ["derive"] }
+tempfile = "3.20"
+
+resplus = { version = "0.1", features = ["full"] }
+toml = "0.8"
+
+[dev-dependencies]
+assert_fs = "1.1"
+
+# The profile that 'dist' will build with
+[profile.dist]
+inherits = "release"
+lto = "thin"
